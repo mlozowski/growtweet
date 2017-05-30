@@ -1,12 +1,29 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>GrowTweet</title>
+
+    <link href="{% static 'css/twitter-modal.css' %}" rel="stylesheet">
+
 </head>
 <body>
 
-<button>Connect Twitter account</button>
+<button id="connectBtn">Connect Twitter account</button>
+
+
+<div id="twitterPopup" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Some text in the Modal..</p>
+  </div>
+
+</div>
+
+<script type="text/javascript" src="{% static 'js/twitter-modal.js' %}"></script>
 
 </body>
 </html>

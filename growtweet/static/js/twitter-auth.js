@@ -9,6 +9,15 @@ function twitter_auth() {
     dataType: 'json',
     success: function (data) {
 
+    },
+    error: function (request, status, error) {
+        data = JSON.parse(request.responseText);
+        if (data.username != undefined) {
+            alert(data.username);
+        }
+        if (data.password != undefined) {
+            alert(data.password)
+        }
     }
   });
 }

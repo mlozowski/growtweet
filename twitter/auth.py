@@ -1,5 +1,4 @@
 
-# Import required packages, including the oauthlib package discussed earlier in the tutorial
 import os
 import configparser
 import oauth2
@@ -16,13 +15,16 @@ def request_token():
     CONSUMER_KEY = config['oauth']['consumer-key']
     CONSUMER_SECRET = config['oauth']['consumer-secret']
 
-    # Create a oauth2.Consumer object that wraps the parameters for the calls to the HTTP endpoints
+    # Create a oauth2.Consumer object that wraps the parameters
+    # for the calls to the HTTP endpoints
     consumer = oauth2.Consumer(CONSUMER_KEY, CONSUMER_SECRET)
 
     # Use the oauth2.Client class to call the Twitter OAuth endpoint
-    resp, content = oauth2.Client(consumer).request('https://api.twitter.com/oauth/request_token', "GET")
+    resp, content = oauth2.Client(consumer).request(
+        'https://api.twitter.com/oauth/request_token', "GET")
 
-    # Create a standard dictionary from the response body, using parse_qsl as a convenience to parse the query string in the response
+    # Create a standard dictionary from the response body, using parse_qsl as
+    # a convenience to parse the query string in the response
     return dict(parse_qsl(content))
 
 

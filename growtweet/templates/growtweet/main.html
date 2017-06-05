@@ -10,23 +10,9 @@
 </head>
 <body>
 
-<button id="connectBtn">Connect Twitter account</button>
-
-
-<div id="twitterPopup" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-      <h4>Authenticate with your Twitter account</h4>
-      <form id="twitter-form" method="post" data-validate-username-url="{% url 'main-page' %}">
-          {% csrf_token %}
-          {{ form.as_p }}
-          <button type="button" onclick="twitter_auth(); return false;" >Authenticate</button>
-      </form>
-  </div>
-
-</div>
+<form action="{% url 'twitter-login' %}">
+    <input type="submit" value="Connect Twitter account">
+</form>
 
 <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/twitter-modal.js' %}"></script>

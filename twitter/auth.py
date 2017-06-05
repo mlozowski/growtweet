@@ -1,5 +1,7 @@
 
 # Import required packages, including the oauthlib package discussed earlier in the tutorial
+import os
+import configparser
 import oauth2
 from urllib.parse import parse_qsl
 
@@ -8,8 +10,11 @@ from django.shortcuts import redirect
 
 def request_token():
     # Set the consumer key and secret
-    CONSUMER_KEY = "***"
-    CONSUMER_SECRET = "***"
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    config = configparser.ConfigParser()
+    config.read(os.path.join(BASE_DIR, 'config.ini'))
+    CONSUMER_KEY = config['oauth']['consumer-key']
+    CONSUMER_SECRET = config['oauth']['consumer-secret']
 
     # Create a oauth2.Consumer object that wraps the parameters for the calls to the HTTP endpoints
     consumer = oauth2.Consumer(CONSUMER_KEY, CONSUMER_SECRET)

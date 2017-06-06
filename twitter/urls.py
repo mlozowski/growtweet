@@ -6,5 +6,6 @@ from . import views
 
 urlpatterns = (
     url(r'^twitterlogin/$', views.twitter_login, name='twitter-login'),
-    url(r'^followers/followers/$', views.followers, name='followers'),
+    url(r'^followers/followers/$',
+        views.Followers.as_view(), name='followers'),
 )

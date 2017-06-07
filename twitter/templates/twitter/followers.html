@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Followers</title>
+</head>
+<body>
+{% if loading %}
+<div class="loading-field">
+<h3>Collecting data in progress. Wait for data.</h3>
+<p>Loading...</p>
+</div>
+{% else %}
+<h4>First you have to authenticate with Twitter</h4>
+<a href="{% url 'twitter-login' %}">Authenticate</a>
+{% endif %}
+</body>
+</html>

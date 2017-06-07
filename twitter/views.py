@@ -1,6 +1,7 @@
 
 from django.http import HttpResponse
 from django.views.generic import View
+from django.shortcuts import render
 
 from .auth import (
     redirect_to_twitter_auth,
@@ -13,7 +14,12 @@ def twitter_login(request):
 
 
 class Followers(View):
+    template_name = 'twitter/followers.html'
+
     def get(self, request):
-        api = get_twitter_api(request)
-        followers_data = api.followers()
-        return HttpResponse('jest')
+        verifier = request.GET.get('oauth_verifier', None)
+        if verifier is not None:
+            request.session['oauth_verifier'] = verifier
+            return render(request, self.template_name, {'loading': True})
+        else:
+            return render(request, self.template_name, {'loading': False})

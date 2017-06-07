@@ -7,6 +7,7 @@ from django.shortcuts import redirect
 from .config import (
     CONSUMER_KEY,
     CONSUMER_SECRET,
+    TOKEN_SECRET,
     REQUEST_TOKEN_ADDRESS,
     TWITTER_LOGIN_ADDRESS,
     TWITTER_ACCESS_TOKEN_ADDRESS,
@@ -50,7 +51,7 @@ def access_data(oauth_token, oauth_verifier):
     :param oauth_verifier: str
     :return: dict
     """
-    token = oauth2.Token(oauth_token, CONSUMER_SECRET)
+    token = oauth2.Token(oauth_token, TOKEN_SECRET)
     token.set_verifier(oauth_verifier)
     consumer = oauth2.Consumer(CONSUMER_KEY, CONSUMER_SECRET)
     client = oauth2.Client(consumer, token)

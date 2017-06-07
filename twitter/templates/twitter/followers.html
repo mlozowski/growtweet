@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,6 +7,7 @@
 </head>
 <body>
 {% if loading %}
+<input class="data-url-class" name="data-url" type="hidden" value="{% url 'get-followers' %}" />
 <div class="loading-field">
 <h3>Collecting data in progress. Wait for data.</h3>
 <p>Loading...</p>
@@ -14,5 +16,7 @@
 <h4>First you have to authenticate with Twitter</h4>
 <a href="{% url 'twitter-login' %}">Authenticate</a>
 {% endif %}
+<script type="text/javascript" src="{% static 'tweetjs/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'tweetjs/followers.js' %}"></script>
 </body>
 </html>

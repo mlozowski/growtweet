@@ -9,8 +9,7 @@ from .config import (
 )
 
 
-def get_twitter_api(request):
-    verifier = request.GET.get('oauth_verifier', None)
+def get_twitter_api(request, verifier):
     oauth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
     token = request.session['request_token']
     del request.session['request_token']

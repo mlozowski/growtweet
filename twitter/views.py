@@ -28,6 +28,7 @@ def limit_handled(cursor):
         except tweepy.RateLimitError:
             # it is very naive approach, but for such a limited time
             # it has to be enough
+            print("We have to wait 16 minutes...")
             time.sleep(16 * 60)
 
 

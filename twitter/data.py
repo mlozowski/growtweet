@@ -39,9 +39,9 @@ def save_user_follower_relation(user_name, follower_name):
     :param user_name: str
     :param follower_name: str
     """
-    twitter_user = TwitterUser.object.get_or_create(
+    twitter_user, not_needed = TwitterUser.objects.get_or_create(
         screen_name=user_name)
-    follower = TwitterUser.objects.get_or_create(
+    follower, not_needed = TwitterUser.objects.get_or_create(
         screen_name=follower_name)
     Follower.objects.get_or_create(
         twitter_user=twitter_user, follower=follower)

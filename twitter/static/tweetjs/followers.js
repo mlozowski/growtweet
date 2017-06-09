@@ -5,7 +5,7 @@ $(document).ready(function() {
 
 
 function followers() {
-  var url = $("input.data-url-class").val() + "?refresh=yes";
+  var url = $("input.data-url-class").val();
   $.ajax({
     url: url,
     type: 'GET',

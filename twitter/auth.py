@@ -3,7 +3,7 @@ import tweepy
 
 from django.shortcuts import redirect
 
-from .config import (
+from twitter.config import (
     CONSUMER_KEY,
     CONSUMER_SECRET,
 )

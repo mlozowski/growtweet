@@ -1,5 +1,5 @@
 
-from .models import Follower
+from twitter.models import Follower
 
 
 def get_processed_followers_followers_data(screen_name):

@@ -9,11 +9,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 import twitter.data
-from .auth import (
+from twitter.auth import (
     redirect_to_twitter_auth,
     get_twitter_api,
 )
-from .models import (
+from twitter.models import (
     TwitterUser,
     Follower,
 )

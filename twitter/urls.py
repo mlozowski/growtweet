@@ -10,5 +10,5 @@ urlpatterns = (
     url(r'^followers/followers/$',
         views.Followers.as_view(), name='followers'),
     url(r'^getfollowers/$',
-        views.GetFollowers.as_view(), name='get-followers'),
+        views.GetRefreshedFollowers.as_view(), name='get-followers'),
 )

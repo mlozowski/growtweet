@@ -1,4 +1,5 @@
 
+import logging
 import time
 
 import tweepy
@@ -15,11 +16,12 @@ from twitter.auth import (
 )
 
 
-def limit_handled(cursor):
+def limit_handled(cursor, do_not_wait_after_limit=False):
     """
     It handles Twitter data limitation. We have to wait for 15 minutes
     to another data delivery.
     :param cursor: tweepy.Cursor
+    :param do_not_wait_after_limit: boolean
     :return: Next data from response
     """
     while True:
@@ -28,8 +30,17 @@ def limit_handled(cursor):
         except tweepy.RateLimitError:
             # it is very naive approach, but for such a limited time
             # it has to be enough
-            print("We have to wait 16 minutes...")
-            time.sleep(16 * 60)
+            if do_not_wait_after_limit is False:
+                logging.info("We have to wait 16 minutes...")
+                time.sleep(16 * 60)
+            else:
+                # Or we can just skip the rest of data and we have
+                # Proof of Concept
+                logging.warning(
+                    "We reached the rate limit and "
+                    "we do not wait for the rest of data"
+                )
+                break
 
 
 def twitter_login(request):
@@ -57,19 +68,26 @@ class GetRefreshedFollowers(APIView):
     def get(self, request):
         verifier = self.request.session['oauth_verifier']
         self.api = get_twitter_api(self.request, verifier)
+        my_name = self.api.me().screen_name
+        logging.info(
+            "Data for user '{}' is going to be refreshed.".format(my_name)
+        )
         del self.request.session['oauth_verifier']
-        data.remove_old_followers(self.api.me().screen_name)
+        logging.info("Removing old data...")
+        data.remove_old_followers(my_name)
         self._refresh_followers()
+        logging.info("Data refreshment completed!")
         followers_followers_data = \
-            data.get_processed_followers_followers_data(
-                self.api.me().screen_name)
+            data.get_processed_followers_followers_data(my_name)
         return Response(
             dict(result=followers_followers_data)
         )
 
     def _refresh_followers(self):
+        logging.info("Starting data refreshment.")
         for follower in limit_handled(
-                tweepy.Cursor(self.api.followers).items()
+                tweepy.Cursor(self.api.followers).items(),
+                do_not_wait_after_limit=True
         ):
             data.save_user_follower_relation(
                 self.api.me().screen_name, follower.screen_name)
@@ -79,7 +97,8 @@ class GetRefreshedFollowers(APIView):
         for follower_follower in limit_handled(
                 tweepy.Cursor(
                     self.api.followers, screen_name=follower.screen_name
-                ).items()
+                ).items(),
+                do_not_wait_after_limit=True
         ):
             data.save_user_follower_relation(
                 follower.screen_name, follower_follower.screen_name)

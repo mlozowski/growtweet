@@ -9,6 +9,7 @@ function followers() {
   $.ajax({
     url: url,
     type: 'GET',
+    timeout: 2*60*60*1000,
     dataType: 'json',
     success: function (data) {
         $('div.loading-field').html('<h1>It works!</h1>');

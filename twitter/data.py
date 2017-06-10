@@ -26,11 +26,7 @@ def get_processed_followers_followers_data(screen_name):
 
 
 def remove_old_followers(screen_name):
-    my_followers = Follower.objects.filter(
-        twitter_user__screen_name=screen_name)
-    for follower in my_followers:
-        follower.follower.delete()
-    TwitterUser.objects.filter(screen_name=screen_name).delete()
+    Follower.objects.filter(twitter_user__screen_name=screen_name).delete()
 
 
 def save_user_follower_relation(user_name, follower_name):

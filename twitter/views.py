@@ -60,7 +60,10 @@ class Followers(View):
 
 
 class GetRefreshedFollowers(APIView):
-
+    """
+    It makes multiple requests to the Twitter and gets
+    followers of my followers. In result it returns JSON data.
+    """
     def __init__(self, **kwargs):
         self.api = None
         super(GetRefreshedFollowers, self).__init__(**kwargs)
@@ -105,6 +108,10 @@ class GetRefreshedFollowers(APIView):
 
 
 class CurrentFollowers(APIView):
+    """
+    It returns latest 'followers of my followers' for the given
+    user name in the URL. The data is JSON type.
+    """
     def get(self, request, user_name):
         return Response(
             dict(result=data.get_processed_followers_followers_data(user_name))

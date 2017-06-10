@@ -29,6 +29,7 @@ INSTALLED_APPS = [
 
     # external packages
     'rest_framework',
+    'rest_framework_swagger',
 
     # my apps
     'growtweet',

@@ -27,6 +27,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # external packages
+    'rest_framework',
+
     # my apps
     'growtweet',
     'twitter',

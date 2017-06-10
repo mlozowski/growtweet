@@ -102,3 +102,10 @@ class GetRefreshedFollowers(APIView):
         ):
             data.save_user_follower_relation(
                 follower.screen_name, follower_follower.screen_name)
+
+
+class CurrentFollowers(APIView):
+    def get(self, request, user_name):
+        return Response(
+            dict(result=data.get_processed_followers_followers_data(user_name))
+        )

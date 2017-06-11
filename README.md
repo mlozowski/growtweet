@@ -1,13 +1,9 @@
 GrowTweet
 =========
 
-It's a small project for Growbots recruitment.
-
-### Descripton
-
 It is a simple application which uses Twitter API. It allows users to see their “second line” followers, in other words - followers, of their followers.
 
-## Common scenario:
+### Common scenario:
 - I go to “/” page
 - I see “Connect Twitter account” button
 - I press “Connect Twitter account” button
@@ -30,4 +26,56 @@ For the call some variables are taken from the browsers session.
 URL request under `/currentfollowers/{user_name}/` with GET method returns JSON data with the latest 'followers of my followers' for the user_name.
 
 
+Installation
+============
 
+GrowTweet is a Django project.
+It can be deployed with uWSGI: https://docs.djangoproject.com/en/1.11/howto/deployment/wsgi/uwsgi/
+
+Application requires Python 3.5 and Django 1.11
+
+All requirements are stored in `requirements.txt` file and can be install with:
+```
+pip -r requirements.txt
+```
+
+You must copy `config_example.ini` file to `config.ini` and change its values to your own.
+
+When application is set up and configured (check Configuration section)
+you can create database and copy static files with commands:
+```
+python manage.py migrate
+python manage.py collectstatic --noinput
+```
+
+Now the easiest way to start the server is to use Django runserver
+```
+python manage.py runserver
+```
+
+For more information refer to Django documentation.
+
+Configuration
+=============
+
+All advanced configuration options are stored in `growtweet/settings.py`.
+It is recommended to make any changes not directly in the `settings.py` file but in created locally `growtweet/local_settings.py`.
+The file will override the parameters from the `setting.py` file.
+
+Most of the settings are standard `Django` settings. The most important are:
+..* DEBUG - when turned off (False) optimizations are turn on and debug info aren't printed.
+⋅⋅* DATABASES - configuration of database engine. Default is SQLite.
+Check Django docs for more info: https://docs.djangoproject.com/en/1.11/ref/settings/#databases
+
+Tox
+===
+
+You can run unit tests and flake8 by simply running command `tox`.
+It will check PEP8 and run unit tests.
+
+If you run
+```
+tox coverage html
+```
+
+You can generate HTML files with unit tests coverage statistics. 

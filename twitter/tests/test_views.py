@@ -19,4 +19,21 @@ class TwitterLoginTest(TestCase):
         mocked_oauth_handler.return_value = magic_mock
         client = Client()
         r = client.get('/twitterlogin/')
-        self.assertEqual(r.status_code, 302)
+        self.assertEquals(r.status_code, 302)
+
+
+class FollowersTest(TestCase):
+    def test_followers_with_oauth_verifier(self):
+        client = Client()
+        r = client.get('/followers/followers/?oauth_verifier=jgdsfjsdfjfh')
+        self.assertTrue(
+            'Collecting data in progress.' in r.content.decode('utf-8'))
+        self.assertEquals(r.status_code, 200)
+
+    def test_followers_without_oauth_verifier(self):
+        client = Client()
+        r = client.get('/followers/followers/')
+        self.assertTrue(
+            'First you have to authenticate with Twitter' in
+            r.content.decode('utf-8'))
+        self.assertEquals(r.status_code, 200)

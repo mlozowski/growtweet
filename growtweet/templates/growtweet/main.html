@@ -1,22 +1,13 @@
 <!DOCTYPE html>
-{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>GrowTweet</title>
-
-    <link href="{% static 'css/twitter-modal.css' %}" rel="stylesheet">
-
 </head>
 <body>
 
 <form action="{% url 'twitter-login' %}">
     <input type="submit" value="Connect Twitter account">
 </form>
-
-<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/twitter-modal.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/twitter-auth.js' %}"></script>
-
 </body>
 </html>

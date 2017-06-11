@@ -63,8 +63,8 @@ It is recommended to make any changes not directly in the `settings.py` file but
 The file will override the parameters from the `setting.py` file.
 
 Most of the settings are standard `Django` settings. The most important are:
-..* DEBUG - when turned off (False) optimizations are turn on and debug info aren't printed.
-⋅⋅* DATABASES - configuration of database engine. Default is SQLite.
+- DEBUG - when turned off (False) optimizations are turn on and debug info aren't printed.
+- DATABASES - configuration of database engine. Default is SQLite.
 Check Django docs for more info: https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 Tox

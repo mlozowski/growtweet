@@ -4,3 +4,7 @@
 /db.sqlite3
 /static/
 /config.ini
+/coverage.xml
+/.coverage
+/htmlcov/
+/.tox/

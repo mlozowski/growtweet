@@ -6,6 +6,7 @@ from django.shortcuts import redirect
 from twitter.config import (
     CONSUMER_KEY,
     CONSUMER_SECRET,
+    CALLBACK_URL,
 )
 
 
@@ -19,7 +20,7 @@ def get_twitter_api(request, verifier):
 
 
 def redirect_to_twitter_auth(request):
-    oauth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+    oauth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET, CALLBACK_URL)
     redirect_url = oauth.get_authorization_url()
     request.session['request_token'] = oauth.request_token
     return redirect(redirect_url)
